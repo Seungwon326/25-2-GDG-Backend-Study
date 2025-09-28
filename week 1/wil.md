@@ -1,0 +1,89 @@
+# 1주차
+
+- 웹 - 인터넷 위에서 동작하는 서비스 중 하나
+    - 인터넷에 연결된 전 세계 사용자들이 서로의 정보를 공휴할 수 있는 장소
+- 웹 동작 : 클라이언트 ↔ 서버
+    - 클라이언트 - 요청(Request)을 보내고 서버의 응답 결과를 받아 사용
+    - 서버 - 클라이언트의 요청을 받아 처리하고, 그에 대한 응답(Response)을 반환
+- URL - 웹 상에서 특정 자원의 위치를 나타내는 주소
+    - ex. http://www.example.com:5883/catagory/food.html?topic=pizza&size=large
+    - Host - 리소스가 위치한 서버의 IP 주소 혹은 도메인 → www.example.com
+    - Port - 서버의 특정 네트워크 포트 번호(일반적으로 생략) → 5883
+    - Path - 서버 내에서 원하는 리소스의 경로 → /catagory/food.html
+    - Query - 서버에 추가적인 정보를 보내는 파라미터, ? 뒤에 key-value 형식으로 나열 → ?topic=pizza&size=large     
+    - Scheme(Protocol) - 컴퓨터와 같은 장치들 사이에서 데이터를 주고받는 방식, 통신하기 위한 규칙 → http
+- HTTP - 웹에서 데이터를 주고받는 서버-클라이언트 모델의 프로토콜(클라이언트의 요청 ↔ 서버의 응답)
+    - 무상태성 - 서버는 클라이언트의 이전 요청 기억X, 독립적으로 처리
+    - 비연결성 - 클라이언트가 요청을 보내고 응답을 받은 후 서버와 연결 유지X
+- HTTP 요청
+    - start line - 요청 메소드, 요청할 경로, HTTP 버전 정보 포함
+        - GET /test.html HTTP/1.1
+    - headers - 요청에 대한 부가 정보
+    - body - 서버에 실제 전송할 데이터
+    - header와 body 사이에는 빈 줄 존재
+- HTTP 주요 메서드
+    - GET - 리소스 조회
+    - POST - 리소스 추가, 등록
+    - PUT - 리소스를 교체, 없으면 새로 생성(리소스 전체 수정)
+    - PATCH - 리소스의 일부를 수정
+    - DELETE - 리소스 삭제
+- HTTP 응답
+    - start line - HTTP 버전, HTTP 상태 코드, 상태 메시지
+        - HTTP/1.1 200 OK
+    - headers - 응답에 대한 부가 정보
+    - body - 실제 응답 데이터
+    - HTTP 주요 상태 코드(응답)
+        - 200 OK - 요청이 성공적을 처리됨
+        - 202 Created - 요청이 성공적으로 처리되어 새로운 리소스 생성
+            - 주고 POST 요청에 대한 응답으로 사용
+        - 400 Bad Request - 클라이언트의 요청이 잘못되어 서버가 이해X
+        - 404 Not Found - 지정한 리소스를 찾을 수 없음
+        - 500 Internal Server Error - 서버 내부 오류로 요청 처리X
+- 클라이언트 사이드 렌더링 - 화면의 뼈대는 재사용하고, 필요한 데이터만 서버에서 받아와 부분적으로 처리
+- 데이터베이스(DB)- 데이터를 체계적으로 모아둔 저장소
+    - DBMS - DB를 관리하는 시스템
+- API - 한 프로그램이 다른 프로그램의 기능이나 데이터를 사용할 수 있도록 미리 정해놓은 규칙이자 소통 창구
+- REST - 네트워크 아키텍처 스타일, HTTP 장점을 최대한 활용할 수 있는 아키텍쳐
+- REST 구성 요소
+    - 자원 - URI: 모든 자원은 고유한 ID를 가짐
+    - 행위 - HTTP Method: 자원을 조작하기 위해 HTTP Method 사용
+    - 표현 - 서버와 클라이언트가 데이터를 주고받는 형식(JSON이 일반적)
+- REST API - 자원을 고유한 URI로 식별하고, 해당 자원에 대한 행위를 HTTP 메서드로 정의하며, 그 결과를 JSON 같은 표준 형식으로 표현하는 웹 서비스 아키텍쳐 스타일
+- JSON - JS의 객체 문법에 기반한 가벼운 데이터 형식
+- Spring - Java로 벡엔드 애플리케이션을 빠르고 안정적으로 만들 수 있도록 기본 구조와 규칙을 제공하는  프레임워크
+- Spring boot - 복잡한 초기 설정 없이 스프링 프레임워크를 사용할 수 있게 하는 도구
+
+# screenshot
+<img width="629" height="248" alt="Image" src="https://github.com/user-attachments/assets/97be839a-bc71-403a-bff9-8d75850c2515" />
+
+# API 명세서
+- **상품 기능**
+    - 상품 정보 등록
+        - HTTP Method : POST
+        - URI : /products
+    - 상품 목록 조회
+        - HTTP Method : GET
+        - URI : /products
+    - 개별 상품 정보 상세 조회
+        - HTTP Method : GET
+        - URI : /products/{productId}
+    - 상품 정보 수정
+        - HTTP Method : PATCH
+        - URI : /products/{productId}
+    - 상품 삭제
+        - HTTP Method : DELETE
+        - URI : /products/{productId}
+
+- **주문 기능**
+    - 주문 정보 생성
+        - HTTP Method : POST
+        - URI : /order
+    - 주문 목록 조회
+        - HTTP Method : GET
+        - URI : /order
+    - 개별 주문 정보 상세 조회
+        - HTTP Method : GET
+        - URI : /order/{orderId}
+    - 주문 취소
+        - HTTP Method : DELETE
+        - URI : /order/{orederId}
