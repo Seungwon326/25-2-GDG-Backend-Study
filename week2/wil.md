@@ -1,9 +1,8 @@
 # 2주차 - 계층형 아케텍쳐와 컨트롤러, 서비스
 
 - 스프링 계층형 아키텍쳐
-    - Browser ↔ Controller ↔ Service ↔ DAO ↔ DB
-        
-                     (DTO)             (DTO)        (DTO)   (Entity)
+    - Browser ↔ Controller ↔ Service ↔ DAO ↔ DB    
+            (DTO)        (DTO)     (DTO) (Entity)
         
         | **계층** | **역할** | **비유** |
         | --- | --- | --- |
