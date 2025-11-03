@@ -15,8 +15,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    // @Transactional
-    public Long createMember(MemberCreateRequest request) {
+    @Transactional
+    public Long createMember(MemberCreateRequest request) { // 회원 등록
         Member existingMember = memberRepository.findByLoginId(request.getLoginId());
         if (existingMember != null) {
             throw new RuntimeException("이미 존재하는 로그인 id입니다: " +  request.getLoginId());
@@ -34,12 +34,12 @@ public class MemberService {
         return member.getId();
     }
 
-    // @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // 전체 회원 목록 조회
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
 
-    // @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // 개별 회원 정보 상세 조회
     public Member getMemberById(Long id) {
         Member member = memberRepository.findById(id);
 
@@ -50,7 +50,8 @@ public class MemberService {
         return member;
     }
 
-    public void updateMember(Long id, MemberUpdateRequest request) {
+    @Transactional
+    public void updateMember(Long id, MemberUpdateRequest request) { // 회원 정보 수정
         Member member = memberRepository.findById(id);
 
         if (member == null) {
@@ -61,7 +62,8 @@ public class MemberService {
         member.updateInfo(request.getPassword(), request.getPhoneNumber(), request.getAddress());
     }
 
-    public void deleteMember(Long id) {
+    @Transactional
+    public void deleteMember(Long id) { // 회원 삭제
         Member member = memberRepository.findById(id);
 
         if (member == null) {
